@@ -1,0 +1,17 @@
+{
+    "name": "gabrielcampos/grafica-adonis",
+    "autoload": {
+        "psr-4": {
+            "Gabrielcampos\\GraficaAdonis\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "gabrielalc23",
+            "email": "gabriellopes.campos23@gmail.com"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^6.11"
+    }
+}

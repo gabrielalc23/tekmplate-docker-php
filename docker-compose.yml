@@ -1,0 +1,23 @@
+services:
+  nginx: 
+    build: 
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    volumes:
+      - ./src:/var/www/html
+    image: nginx:alpine
+    ports:
+      - '8080:80'
+    networks:
+      - internal
+
+  php:
+    volumes:
+      - ./src:/var/www/html
+    image: php:fpm-alpine
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge  # Define a rede para comunicação entre os containers
