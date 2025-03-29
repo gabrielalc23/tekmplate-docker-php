@@ -1,23 +1,39 @@
 services:
-  nginx: 
-    build: 
+  nginx:
+    build:
       context: .
       dockerfile: .docker/nginx/Dockerfile
     volumes:
       - ./src:/var/www/html
+      
     image: nginx:alpine
     ports:
       - '8080:80'
     networks:
       - internal
-
+  app:
+    build:
+      dockerfile: ./.docker/nginx/Dockerfile
+    volumes:
+      - /var/www/html/vendor
+      - ./src:/var/www/html
   php:
     volumes:
       - ./src:/var/www/html
+      
     image: php:fpm-alpine
+    networks:
+      - internal
+
+  composer:
+    image: composer:latest
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    command: ["install"]
     networks:
       - internal
 
 networks:
   internal:
-    driver: bridge  # Define a rede para comunicação entre os containers
+    driver: bridge
